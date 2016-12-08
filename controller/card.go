@@ -3,9 +3,9 @@ package controller
 import (
 	"net/http"
 
-	"github.com/Dunkelheit/feedbackapp/database"
-	"github.com/Dunkelheit/feedbackapp/model"
-	"github.com/Dunkelheit/feedbackapp/util"
+	"github.com/Dunkelheit/feedbackgame-backend/database"
+	"github.com/Dunkelheit/feedbackgame-backend/model"
+	"github.com/Dunkelheit/feedbackgame-backend/util"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

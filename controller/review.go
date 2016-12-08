@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Dunkelheit/feedbackapp/database"
-	"github.com/Dunkelheit/feedbackapp/model"
+	"github.com/Dunkelheit/feedbackgame-backend/database"
+	"github.com/Dunkelheit/feedbackgame-backend/model"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

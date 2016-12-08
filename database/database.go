@@ -1,7 +1,7 @@
 package database
 
 import (
-	"github.com/Dunkelheit/feedbackapp/model"
+	"github.com/Dunkelheit/feedbackgame-backend/model"
 	"github.com/jinzhu/gorm"
 )
 
