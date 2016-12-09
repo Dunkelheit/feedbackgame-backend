@@ -5,6 +5,7 @@ import (
 
 	"github.com/Dunkelheit/feedbackapp/controller"
 	"github.com/Dunkelheit/feedbackapp/model"
+	"github.com/Dunkelheit/feedbackgame-backend/error"
 	"github.com/Dunkelheit/feedbackgame-backend/router/middleware"
 	"gopkg.in/gin-gonic/gin.v1"
 )
@@ -14,9 +15,28 @@ func ping(c *gin.Context) {
 	c.JSON(http.StatusOK, card)
 }
 
+func newPing(c *gin.Context) (interface{}, *error.APIError) {
+	card := model.Card{Title: "Hello"}
+	return card, nil
+}
+
+func createController(handler func(*gin.Context) (interface{}, *error.APIError)) func(*gin.Context) {
+	return func(c *gin.Context) {
+		response, err := handler(c)
+		if err != nil {
+			c.JSON(err.HTTPStatusCode, err)
+		} else {
+			c.JSON(http.StatusOK, response)
+		}
+	}
+}
+
 func loadRoutes(router *gin.Engine) {
 	routes := router.Group("/api")
 	routes.POST("/login", controller.Login)
+
+	routes.GET("/test", createController(newPing))
+	routes.GET("/test2", ping)
 
 	myRoutes := routes.Group("/my")
 	{
