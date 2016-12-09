@@ -3,9 +3,9 @@ package router
 import (
 	"net/http"
 
-	"github.com/Dunkelheit/feedbackapp/controller"
-	"github.com/Dunkelheit/feedbackapp/model"
+	"github.com/Dunkelheit/feedbackgame-backend/controller"
 	"github.com/Dunkelheit/feedbackgame-backend/error"
+	"github.com/Dunkelheit/feedbackgame-backend/model"
 	"github.com/Dunkelheit/feedbackgame-backend/router/middleware"
 	"gopkg.in/gin-gonic/gin.v1"
 )
