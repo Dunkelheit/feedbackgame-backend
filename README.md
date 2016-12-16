@@ -115,7 +115,7 @@ Example response:
 		"company": "IceMobile",
 		"email": "arjo.hooimeijer@icemobile.com",
 		"avatar": "arjo.hooimeijer.png",
-		"role": ""
+		"role": "user"
 	},
 	"reviewee": {
 		"id": 14,
@@ -128,7 +128,7 @@ Example response:
 		"company": "ICEMOBILE",
 		"email": "rosa.vancolmjon@icemobile.com",
 		"avatar": "rosa.vancolmjon.png",
-		"role": ""
+		"role": "user"
 	},
 	"cards": null,
 	"remark": "Lorem ipsum",
@@ -177,7 +177,7 @@ Example response:
 		"company": "IceMobile",
 		"email": "arjo.hooimeijer@icemobile.com",
 		"avatar": "arjo.hooimeijer.png",
-		"role": ""
+		"role": "user"
 	},
 	"reviewee": {
 		"id": 15,
@@ -190,7 +190,7 @@ Example response:
 		"company": "ICEMOBILE",
 		"email": "tanja.hattink@icemobile.com",
 		"avatar": "tanja.hattink.png",
-		"role": ""
+		"role": "user"
 	},
 	"cards": [{
 		"id": 5,
@@ -228,15 +228,27 @@ Example response:
 [{
 	"id": 20,
 	"title": "Accurate",
-	"category": 0 // 0: Positive
+	"category": 0, // 0: Positive
+	"epic": {
+      	"id": 4,
+      	"title": "Teamwork"
+    }
 }, {
 	"id": 39,
 	"title": "Always talking",
-	"category": 1 // 1: Negative
+	"category": 1, // 1: Negative
+	"epic": {
+      	"id": 3,
+      	"title": "Leadership"
+    }
 }, {
 	"id": 16,
 	"title": "Ambitious",
-	"category": 0
+	"category": 0,
+	"epic": {
+      	"id": 3,
+      	"title": "Leadership"
+    }
 }]
 ```
 
