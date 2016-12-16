@@ -1,6 +1,9 @@
 package database
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/Dunkelheit/feedbackgame-backend/model"
+	"github.com/jinzhu/gorm"
+)
 
 // DB is the database instance
 var DB *gorm.DB
