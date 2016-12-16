@@ -13,7 +13,7 @@ import (
 func AllCards(c *gin.Context) {
 	var cards []model.Card
 	// if err := database.DB.Order("title asc").Find(&cards).Error; err != nil {
-	database.DB.Order("title asc").Find(&cards)
+	database.DB.Order("title asc").Preload("Epic").Find(&cards)
 	c.JSON(http.StatusOK, cards)
 }
 

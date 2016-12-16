@@ -5,4 +5,6 @@ type Card struct {
 	BaseModel
 	Title    string       `json:"title" binding:"required"`
 	Category CardCategory `json:"category" binding:"exists"`
+	EpicID   uint         `json:"-"`
+	Epic     Epic         `json:"epic"`
 }
