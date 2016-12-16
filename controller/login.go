@@ -114,6 +114,7 @@ func entryToUser(user *ldap.Entry) *model.User {
 		Department: user.GetAttributeValue(ldapAttrDepartment),
 		Company:    user.GetAttributeValue(ldapAttrCompany),
 		Email:      user.GetAttributeValue(ldapAttrMail),
+		Avatar:     user.GetAttributeValue(ldapAttrSAMAccountName) + ".png",
 	}
 }
 
