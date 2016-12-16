@@ -307,3 +307,27 @@ Update a user. Only used in the admin console.
 Delete a user. Only used in the admin console.
 
 * Role required: admin
+
+### GET /api/epics
+
+Retrieve all the epics.
+
+Example response:
+
+```
+[{
+	"id": 1,
+	"title": "Group A"
+}, {
+	"id": 2,
+	"title": "Group B"
+}, {
+	"id": 3,
+	"title": "Group C"
+}, {
+	"id": 4,
+	"title": "Group D"
+}]
+```
+
+* Role required: user

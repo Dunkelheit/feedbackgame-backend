@@ -65,6 +65,10 @@ func loadRoutes(router *gin.Engine) {
 		reviewRoutes.PUT("/:reviewId", middleware.RolesRequired("user"), controller.UpdateReview)
 		reviewRoutes.DELETE("/:reviewId", middleware.RolesRequired("user", "admin"), ping)
 	}
+	epicRoutes := routes.Group("/epics")
+	{
+		epicRoutes.GET("", middleware.RolesRequired("user"), controller.AllEpics)
+	}
 }
 
 // NewRouter makes the router
