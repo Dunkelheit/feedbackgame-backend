@@ -34,6 +34,8 @@ Response example:
 }
 ```
 
+In the response you will find the header `x-auth-token`, which you have to send in every subsequent request. This header does not change its value.
+
 * Role required: none
 
 ### GET /api/my/reviews
