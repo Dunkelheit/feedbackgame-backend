@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/Dunkelheit/feedbackapp/util"
 	"github.com/Dunkelheit/feedbackgame-backend/database"
 	"github.com/Dunkelheit/feedbackgame-backend/model"
 	"gopkg.in/gin-gonic/gin.v1"
@@ -49,6 +50,16 @@ func MyReviews(c *gin.Context) {
 	c.JSON(http.StatusOK, reviews)
 }
 
+// ReviewByID gets a single review by its identifier
+func ReviewByID(c *gin.Context) {
+	var review model.Review
+	if database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").First(&review, util.StringToID(c.Param("reviewId"))).RecordNotFound() {
+		c.JSON(http.StatusNotFound, "Review not found")
+		return
+	}
+	c.JSON(http.StatusOK, review)
+}
+
 // CreateReview creates a review
 func CreateReview(c *gin.Context) {
 	type reviewForm struct {
@@ -67,6 +78,26 @@ func CreateReview(c *gin.Context) {
 		ReviewerID: in.ReviewerID,
 		RevieweeID: in.RevieweeID,
 		Cards:      []model.Card{},
+	}
+	database.DB.Create(review)
+
+	c.JSON(http.StatusOK, review)
+}
+
+// UpdateReview updates a review
+func UpdateReview(c *gin.Context) {
+	in := &model.Review{}
+	err := c.Bind(in)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	review := &model.Review{
+		Remark:     "Lorem ipsum",
+		Completed:  true,
+		ReviewerID: in.ReviewerID,
+		RevieweeID: in.RevieweeID,
+		Cards:      in.Cards,
 	}
 	database.DB.Create(review)
 

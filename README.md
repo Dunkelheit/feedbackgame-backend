@@ -96,7 +96,45 @@ Create a review. Only used in the admin console.
 
 ### GET /api/reviews/:id
 
-Get a single review. Only used in the admin console.
+Get a single review. 
+
+Example response:
+
+```
+{
+	"id": 35,
+	"uuid": "31767b5a-3da6-49b6-a0a2-b3022423cbc6",
+	"reviewer": {
+		"id": 18,
+		"username": "arjo.hooimeijer",
+		"firstName": "Arjo",
+		"surname": "Hooimeijer",
+		"fullName": "Arjo Hooimeijer",
+		"jobTitle": "Solution Architect ",
+		"department": "Technology ",
+		"company": "IceMobile",
+		"email": "arjo.hooimeijer@icemobile.com",
+		"avatar": "arjo.hooimeijer.png",
+		"role": ""
+	},
+	"reviewee": {
+		"id": 14,
+		"username": "rosa.vancolmjon",
+		"firstName": "Rosa",
+		"surname": "van Colmjon",
+		"fullName": "Rosa van Colmjon",
+		"jobTitle": "SCRUM Master",
+		"department": "Project Management",
+		"company": "ICEMOBILE",
+		"email": "rosa.vancolmjon@icemobile.com",
+		"avatar": "rosa.vancolmjon.png",
+		"role": ""
+	},
+	"cards": null,
+	"remark": "Lorem ipsum",
+	"completed": false
+}
+```
 
 * Role required: user
 

@@ -84,6 +84,14 @@ func filterEntriesWithoutMail(entries []*ldap.Entry) []*ldap.Entry {
 				fallthrough
 			case "thomas.macquart@icemobile.com":
 				fallthrough
+			case "leon.versteeg@icemobile.com":
+				fallthrough
+			case "jose.moar@icemobile.com":
+				fallthrough
+			case "tanja.hattink@icemobile.com":
+				fallthrough
+			case "arnoud.andeweg@icemobile.com":
+				fallthrough
 			case "thomas.pienaar@icemobile.com":
 				result = append(result, entry)
 			}

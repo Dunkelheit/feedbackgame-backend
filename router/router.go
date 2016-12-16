@@ -61,8 +61,8 @@ func loadRoutes(router *gin.Engine) {
 	{
 		reviewRoutes.GET("", middleware.RolesRequired("user"), controller.AllReviews)
 		reviewRoutes.POST("", middleware.RolesRequired("user", "admin"), controller.CreateReview)
-		reviewRoutes.GET("/:reviewId", middleware.RolesRequired("user"), ping)
-		reviewRoutes.PUT("/:reviewId", middleware.RolesRequired("user"), ping)
+		reviewRoutes.GET("/:reviewId", middleware.RolesRequired("user"), controller.ReviewByID)
+		reviewRoutes.PUT("/:reviewId", middleware.RolesRequired("user"), controller.UpdateReview)
 		reviewRoutes.DELETE("/:reviewId", middleware.RolesRequired("user", "admin"), ping)
 	}
 }
