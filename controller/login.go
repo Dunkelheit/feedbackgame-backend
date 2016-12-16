@@ -188,7 +188,8 @@ func Login(c *gin.Context) {
 	var currentUsers int64
 	database.DB.Model(&model.User{}).Count(&currentUsers)
 
-	if currentUsers == 0 {
+	// if currentUsers == 0 {
+	if false {
 		go func() {
 			defer l.Close()
 			newUsers, err := preloadLDAPUsers(l)

@@ -59,7 +59,7 @@ Response example:
 		"company": "ICEMOBILE",
 		"email": "arturo.martinez@icemobile.com",
 		"avatar": "arturo.martinez.png",
-		"role": ""
+		"role": "user"
 	},
 	"reviewee": {
 		"id": 4,
@@ -72,7 +72,7 @@ Response example:
 		"company": "ICEMOBILE",
 		"email": "andrew.gerssen@icemobile.com",
 		"avatar": "andrew.gerssen.png",
-		"role": ""
+		"role": "user"
 	},
 	"cards": null,
 	"remark": "Lorem ipsum",
@@ -195,15 +195,27 @@ Example response:
 	"cards": [{
 		"id": 5,
 		"title": "Humorous",
-		"category": 0
+		"category": 0,
+		"epic": {
+			"id": 3,
+			"title": "Leadership"
+		}
 	}, {
 		"id": 6,
 		"title": "Good communicator",
-		"category": 0
+		"category": 0,
+		"epic": {
+			"id": 3,
+			"title": "Leadership"
+		}
 	}, {
 		"id": 7,
 		"title": "Creative",
-		"category": 0
+		"category": 0,
+		"epic": {
+			"id": 3,
+			"title": "Leadership"
+		}
 	}],
 	"remark": "Ewww! This guy smells like Cheeto's :(",
 	"completed": true

@@ -27,7 +27,7 @@ func AllReviews(c *gin.Context) {
 		[2016-11-28 11:46:02]  [0.91ms]  SELECT * FROM "cards" INNER JOIN "review_cards" ON "review_cards"."card_id" = "cards"."id"
 		WHERE "cards".deleted_at IS NULL AND (("review_cards"."review_id" IN ('1')))
 	*/
-	database.DB.Model(&reviews).Preload("Reviewer").Preload("Reviewee").Preload("Cards").Find(&reviews)
+	database.DB.Model(&reviews).Preload("Reviewer").Preload("Reviewee").Preload("Cards").Preload("Epic").Find(&reviews)
 	c.JSON(http.StatusOK, reviews)
 }
 
@@ -53,7 +53,7 @@ func MyReviews(c *gin.Context) {
 // ReviewByID gets a single review by its identifier
 func ReviewByID(c *gin.Context) {
 	var review model.Review
-	if database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").First(&review, util.StringToID(c.Param("reviewId"))).RecordNotFound() {
+	if database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").Preload("Cards.Epic").First(&review, util.StringToID(c.Param("reviewId"))).RecordNotFound() {
 		c.JSON(http.StatusNotFound, "Review not found")
 		return
 	}
@@ -114,7 +114,7 @@ func UpdateReview(c *gin.Context) {
 	database.DB.Save(&review)
 
 	var response model.Review
-	database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").First(&response, review.ID)
+	database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").Preload("Epic").First(&response, review.ID)
 	c.JSON(http.StatusOK, response)
 }
 

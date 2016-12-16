@@ -1,9 +1,6 @@
 package database
 
-import (
-	"github.com/Dunkelheit/feedbackgame-backend/model"
-	"github.com/jinzhu/gorm"
-)
+import "github.com/jinzhu/gorm"
 
 // DB is the database instance
 var DB *gorm.DB
@@ -18,13 +15,6 @@ func OpenDB() {
 	// defer DB.Close()
 
 	DB.LogMode(true)
-
-	DB.DropTable(&model.Review{}, &model.Card{}, &model.User{}, &model.Role{}, &model.Epic{})
-	DB.AutoMigrate(&model.Card{}, &model.User{}, &model.Review{}, &model.Role{}, &model.Epic{})
-
-	DB.Model(&model.Review{}).AddForeignKey("reviewer_id", "users(id)", "CASCADE", "CASCADE")
-	DB.Model(&model.Review{}).AddForeignKey("reviewee_id", "users(id)", "CASCADE", "CASCADE")
-	DB.Model(&model.Card{}).AddForeignKey("epic_id", "epic(id)", "CASCADE", "CASCADE")
 
 	DB.Create(&model.Epic{Title: "Visionair"})
 	DB.Create(&model.Epic{Title: "Social"})
@@ -92,4 +82,5 @@ func OpenDB() {
 	DB.Create(&model.Card{Title: "Narrow-minded", Category: model.CardCategoryNegative, EpicID: 5})
 	DB.Create(&model.Card{Title: "Reluctant", Category: model.CardCategoryNegative, EpicID: 3})
 	DB.Create(&model.Card{Title: "Cynical", Category: model.CardCategoryNegative, EpicID: 5})
+
 }
