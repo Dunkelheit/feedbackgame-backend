@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Dunkelheit/feedbackapp/util"
@@ -33,18 +32,33 @@ func AllReviews(c *gin.Context) {
 
 // MyReviews shows only my reviews
 func MyReviews(c *gin.Context) {
-	userName, what := c.Get("username")
-	fmt.Println("Getting username in shenanigans")
-	fmt.Println(userName)
-	fmt.Println(what)
+	userName, _ := c.Get("username")
 
 	var reviews []model.Review
 
-	if err := database.DB.Joins("JOIN users ON users.id = reviews.reviewer_id").
-		Where("users.username = ?", userName).Preload("Reviewer").
-		Preload("Reviewee").Preload("Cards").Find(&reviews).Error; err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		return
+	filter := c.DefaultQuery("filter", "all")
+
+	if filter == "open" {
+		if err := database.DB.Joins("JOIN users ON users.id = reviews.reviewer_id").
+			Where("users.username = ?", userName).Where("completed = ?", false).Preload("Reviewer").
+			Preload("Reviewee").Preload("Cards").Find(&reviews).Error; err != nil {
+			c.JSON(http.StatusBadRequest, err)
+			return
+		}
+	} else if filter == "close" {
+		if err := database.DB.Joins("JOIN users ON users.id = reviews.reviewer_id").
+			Where("users.username = ?", userName).Where("completed = ?", true).Preload("Reviewer").
+			Preload("Reviewee").Preload("Cards").Find(&reviews).Error; err != nil {
+			c.JSON(http.StatusBadRequest, err)
+			return
+		}
+	} else {
+		if err := database.DB.Joins("JOIN users ON users.id = reviews.reviewer_id").
+			Where("users.username = ?", userName).Preload("Reviewer").
+			Preload("Reviewee").Preload("Cards").Find(&reviews).Error; err != nil {
+			c.JSON(http.StatusBadRequest, err)
+			return
+		}
 	}
 
 	c.JSON(http.StatusOK, reviews)
