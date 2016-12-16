@@ -140,7 +140,75 @@ Example response:
 
 ### PUT /api/reviews/:id
 
-Update a review. Under construction.
+Complete a review.
+
+You only need to send the identifiers of the chosen cards, and the remark (to be extended to include one remark per card).
+
+Example request:
+
+```
+PUT /api/reviews/36
+{
+	"cards": [{
+		"id": 5
+	}, {
+		"id": 6
+	}, {
+		"id": 7
+	}],
+	"remark": "This guy smells like Cheeto's"
+}
+```
+
+Example response:
+
+```
+{
+	"id": 36,
+	"uuid": "9fb11d44-41f2-431b-9455-bf1cb1ef2044",
+	"reviewer": {
+		"id": 18,
+		"username": "arjo.hooimeijer",
+		"firstName": "Arjo",
+		"surname": "Hooimeijer",
+		"fullName": "Arjo Hooimeijer",
+		"jobTitle": "Solution Architect ",
+		"department": "Technology ",
+		"company": "IceMobile",
+		"email": "arjo.hooimeijer@icemobile.com",
+		"avatar": "arjo.hooimeijer.png",
+		"role": ""
+	},
+	"reviewee": {
+		"id": 15,
+		"username": "tanja.hattink",
+		"firstName": "Tanja",
+		"surname": "Hattink",
+		"fullName": "Tanja Hattink",
+		"jobTitle": "Head of People Operations",
+		"department": "Human Resource",
+		"company": "ICEMOBILE",
+		"email": "tanja.hattink@icemobile.com",
+		"avatar": "tanja.hattink.png",
+		"role": ""
+	},
+	"cards": [{
+		"id": 5,
+		"title": "Humorous",
+		"category": 0
+	}, {
+		"id": 6,
+		"title": "Good communicator",
+		"category": 0
+	}, {
+		"id": 7,
+		"title": "Creative",
+		"category": 0
+	}],
+	"remark": "Ewww! This guy smells like Cheeto's :(",
+	"completed": true
+}
+```
 
 * Role required: user
 

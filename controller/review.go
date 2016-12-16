@@ -92,16 +92,30 @@ func UpdateReview(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-	review := &model.Review{
-		Remark:     "Lorem ipsum",
-		Completed:  true,
-		ReviewerID: in.ReviewerID,
-		RevieweeID: in.RevieweeID,
-		Cards:      in.Cards,
-	}
-	database.DB.Create(review)
 
-	c.JSON(http.StatusOK, review)
+	var review model.Review
+	if database.DB.First(&review, util.StringToID(c.Param("reviewId"))).RecordNotFound() {
+		c.JSON(http.StatusNotFound, false)
+		return
+	}
+
+	var cards = []model.Card{}
+	// FIXME: Unnecessary SELECTs and UPDATEs
+	for _, entry := range in.Cards {
+		var card model.Card
+		database.DB.First(&card, entry.ID)
+		cards = append(cards, card)
+	}
+
+	review.Remark = in.Remark
+	review.Cards = cards
+	review.Completed = true
+
+	database.DB.Save(&review)
+
+	var response model.Review
+	database.DB.Preload("Reviewer").Preload("Reviewee").Preload("Cards").First(&response, review.ID)
+	c.JSON(http.StatusOK, response)
 }
 
 // CloseReview closes a review
